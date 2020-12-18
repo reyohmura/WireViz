@@ -13,6 +13,7 @@ from collections import Counter
 from typing import List
 from pathlib import Path
 import re
+import os
 
 
 class Harness:
@@ -302,7 +303,7 @@ class Harness:
             file.write(f' <title>{APP_NAME} Diagram and BOM</title>\n')
             file.write('</head><body style="font-family:Arial">\n')
 
-            file.write('<h1>Diagram</h1>')
+            file.write('<h1>'+ os.path.splitext(os.path.basename(filename))[0]+'</h1>')
             with open_file_read(f'{filename}.svg') as svg:
                 file.write(re.sub(
                     '^<[?]xml [^?>]*[?]>[^<]*<!DOCTYPE [^>]*>',

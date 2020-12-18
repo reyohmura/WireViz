@@ -28,6 +28,7 @@ COLOR_CODES = {
         'VTBU', 'BUVT', 'VTOG', 'OGVT', 'VTGN', 'GNVT', 'VTBN', 'BNVT', 'VTSL', 'SLVT'],
     'T568A': ['WHGN', 'GN', 'WHOG', 'BU', 'WHBU', 'OG', 'WHBN', 'BN'],
     'T568B': ['WHOG', 'OG', 'WHGN', 'BU', 'WHBU', 'GN', 'WHBN', 'BN'],
+    'IST': ['RD','BK','BU','GN','YE'],
 }
 
 # Convention: Color names should be 2 letters long, to allow for multicolored wires

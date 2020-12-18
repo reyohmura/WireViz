@@ -6,6 +6,7 @@ import os
 import sys
 
 import yaml
+# import codecs
 
 if __name__ == '__main__':
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -15,7 +16,7 @@ from wireviz.Harness import Harness
 
 def parse(yaml_input, file_out=None, generate_bom=False):
 
-    yaml_data = yaml.safe_load(yaml_input)
+    yaml_data = yaml.safe_load(yaml_input)#original
 
     def expand(yaml_data):
         # yaml_data can be:
@@ -180,11 +181,15 @@ def parse(yaml_input, file_out=None, generate_bom=False):
             raise Exception('Wrong number of connection parameters')
 
     harness.output(filename=file_out, fmt=('png', 'svg'), gen_bom=generate_bom, view=False)
+    # harness.output(filename=file_out, fmt=('png'), gen_bom=generate_bom, view=False)
+
 
 
 def parse_file(yaml_file, file_out=None, generate_bom=False):
-    with open(yaml_file, 'r') as file:
+    with open(yaml_file, 'r', encoding='utf-8') as file: #original
+
         yaml_input = file.read()
+        yaml_input = yaml_input.decode('utf-8')
 
     if not file_out:
         fn, fext = os.path.splitext(yaml_file)
@@ -193,12 +198,11 @@ def parse_file(yaml_file, file_out=None, generate_bom=False):
 
     parse(yaml_input, file_out=file_out, generate_bom=generate_bom)
 
-
 def parse_cmdline():
     parser = argparse.ArgumentParser(
         description='Generate cable and wiring harness documentation from YAML descriptions',
     )
-    parser.add_argument('input_file', action='store', type=str, metavar='YAML_FILE')
+    parser.add_argument('input_file', action='store', type=str, metavar='YAML_FILE',)
     parser.add_argument('-o', '--output_file', action='store', type=str, metavar='OUTPUT')
     parser.add_argument('--generate-bom', action='store_true', default=True)
     parser.add_argument('--prepend-file', action='store', type=str, metavar='YAML_FILE')
@@ -213,7 +217,7 @@ def main():
         print(f'Error: input file {args.input_file} inaccessible or does not exist, check path')
         sys.exit(1)
 
-    with open(args.input_file) as fh:
+    with open(args.input_file,encoding="utf-8") as fh:
         yaml_input = fh.read()
 
     if args.prepend_file:
@@ -233,7 +237,6 @@ def main():
     file_out = os.path.abspath(file_out)
 
     parse(yaml_input, file_out=file_out, generate_bom=args.generate_bom)
-
 
 if __name__ == '__main__':
     main()

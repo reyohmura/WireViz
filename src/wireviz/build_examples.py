@@ -51,7 +51,5 @@ if tutorials:
             file.write('\n')
 
             file.write('\nOutput:\n\n'.format(i))
-
             file.write('![](tutorial{:02d}.png)\n\n'.format(i))
-
             file.write('[Bill of Materials](tutorial{:02d}.bom.tsv)\n\n\n'.format(i))

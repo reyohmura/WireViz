@@ -1,3 +1,7 @@
 __pycache__/
 _test/
 wv-env/
+get-bom-han-key.json
+importgspread_test.py
+WIREVIZ_changes_when_installing.txt
+WIREVIZ_inputfile_memo.txt

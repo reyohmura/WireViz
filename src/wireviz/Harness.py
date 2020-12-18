@@ -168,7 +168,7 @@ class Harness:
                      f'{cable.wirecount}x' if cable.show_wirecount else None,
                      f'{cable.gauge} {cable.gauge_unit}{awg_fmt}' if cable.gauge else None,
                      '+ S' if cable.shield else None,
-                     f'{cable.length} m' if cable.length > 0 else None,
+                     f'{cable.length} mm' if cable.length > 0 else None,
                      cable.color, html_colorbar(cable.color)],
                     '<!-- wire table -->',
                     [html_image(cable.image)],
@@ -365,7 +365,7 @@ class Harness:
             gauge_name = f' x {shared.gauge} {shared.gauge_unit}' if shared.gauge else ' wires'
             shield_name = ' shielded' if shared.shield else ''
             name = f'Cable{cable_type}, {shared.wirecount}{gauge_name}{shield_name}'
-            item = {'item': name, 'qty': round(total_length, 3), 'unit': 'm', 'designators': designators,
+            item = {'item': name, 'qty': round(total_length, 3), 'unit': 'mm', 'designators': designators,
                     'manufacturer': remove_line_breaks(shared.manufacturer), 'mpn': remove_line_breaks(shared.mpn), 'pn': shared.pn}
             bom_cables.append(item)
         # bundles (ignores wirecount)
@@ -392,7 +392,7 @@ class Harness:
             gauge_name = f', {shared["gauge"]} {shared["gauge_unit"]}' if shared.get('gauge', None) else ''
             gauge_color = f', {shared["color"]}' if 'color' in shared != '' else ''
             name = f'Wire{wire_type}{gauge_name}{gauge_color}'
-            item = {'item': name, 'qty': round(total_length, 3), 'unit': 'm', 'designators': designators,
+            item = {'item': name, 'qty': round(total_length, 3), 'unit': 'mm', 'designators': designators,
                     'manufacturer': shared['manufacturer'], 'mpn': shared['mpn'], 'pn': shared['pn']}
             bom_cables.append(item)
             bom_cables = sorted(bom_cables, key=lambda k: k['item'])  # sort list of dicts by their values (https://stackoverflow.com/a/73050)
